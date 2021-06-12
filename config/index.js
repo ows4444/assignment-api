@@ -1,4 +1,4 @@
-require("dotenv").load();
+require("dotenv").config();
 
 const REQUIRED_KEYS = [
   "DB_USERNAME",
