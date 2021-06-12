@@ -26,7 +26,7 @@ const {
 
 module.exports = {
   JWT_TOKEN,
-  TOKEN_EXPIRATION_TIME: Number(TOKEN_EXPIRATION_TIME),
+  TOKEN_EXPIRATION_TIME: TOKEN_EXPIRATION_TIME,
 
   // Sequelize config, sourced based on current NODE_ENV from models/index.js file
   [process.env.NODE_ENV || "development"]: {
@@ -35,5 +35,6 @@ module.exports = {
     database: DB_DATABASE,
     host: DB_HOST,
     dialect: "postgres",
+    logging: false,
   },
 };

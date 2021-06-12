@@ -3,7 +3,6 @@ const logger = require("morgan");
 const passport = require("passport");
 require("./server/middleware/passport");
 require("./config/");
-
 // Set up the express app
 const app = express();
 
