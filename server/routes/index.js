@@ -9,4 +9,7 @@ module.exports = (app) => {
   app.get("/api/user/me", userController.profile);
 
   app.get("/api/film", filmController.list);
+  app.post("/api/film", filmController.create);
+  app.get("/api/film/:id", filmController.getOne);
+  app.delete("/api/film/:id", filmController.delete);
 };

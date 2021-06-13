@@ -35,7 +35,7 @@ module.exports = {
         allowNull: false,
       },
       genre: {
-        type: Sequelize.STRING,
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
       },
       photo: {

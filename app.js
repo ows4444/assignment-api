@@ -13,10 +13,10 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
+app.use('/uploads', express.static('uploads'))
 
 // Require our routes into the application.
 require("./server/routes")(app);
-
 app.get("*", (req, res) => res.status(200).send("Welcome to nothingness."));
 
 module.exports = app;

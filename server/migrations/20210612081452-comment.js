@@ -10,10 +10,15 @@ module.exports = {
         unique: true,
         primaryKey: true,
       },
-      creatorId: {
+      UserId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "Users", key: "id" },
+      },
+      FilmId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: "Films", key: "id" },
       },
       content: {
         type: Sequelize.STRING,

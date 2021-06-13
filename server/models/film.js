@@ -6,9 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     rating: { type: DataTypes.INTEGER, allowNull: false },
     ticketPrice: { type: DataTypes.STRING, allowNull: false },
     country: { type: DataTypes.STRING, allowNull: false },
-    genre: { type: DataTypes.STRING, allowNull: false },
+    genre: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
     photo: { type: DataTypes.STRING, allowNull: false },
   });
 
+  Film.associate = function (models) {
+    Film.hasMany(models.Comment, { as: "comments" });
+  };
   return Film;
 };

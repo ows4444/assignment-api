@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-
+const Comment = require("./comment");
 const SALT_ROUNDS = 10;
 
 function hashPassword(user) {
@@ -29,6 +29,13 @@ module.exports = (sequelize, DataTypes) => {
   User.prototype.isValidPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
-
+  User.associate = function (models) {
+    User.hasMany(models.Comment, { as: "comments" });
+    User.belongsToMany(models.Film, {
+      through: "Comment",
+      foreignKey: "UserId",
+      as: "films",
+    });
+  };
   return User;
 };
