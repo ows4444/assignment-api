@@ -5,4 +5,5 @@ uploads/*
 
 *.log
 !uploads/readme.md
+!uploads/film.png
 yarn.lock

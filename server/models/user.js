@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const Comment = require("./comment");
 const SALT_ROUNDS = 10;
 
 function hashPassword(user) {
