@@ -1,4 +1,13 @@
 const { API_UPLOAD_URL } = require("../../config");
+
+function maskUrl(result) {
+  if (result.constructor === Array) {
+    var arrayLength = result.length;
+    for (var i = 0; i < arrayLength; i++) result[i].photo = API_UPLOAD_URL + result[i].photo;
+  } else result.photo = API_UPLOAD_URL + result.photo;
+  return result;
+}
+
 module.exports = (sequelize, DataTypes) => {
   const Film = sequelize.define(
     "Film",
@@ -15,14 +24,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       hooks: {
-        afterFind: function (result) {
-          if (result.constructor === Array) {
-            var arrayLength = result.length;
-            for (var i = 0; i < arrayLength; i++) result[i].photo = API_UPLOAD_URL + result[i].photo;
-          } else result.photo = API_UPLOAD_URL + result[i].photo;
-
-          return result;
-        },
+        afterFind: maskUrl,
+        afterUpdate: maskUrl,
+        afterCreate: maskUrl,
       },
     }
   );
