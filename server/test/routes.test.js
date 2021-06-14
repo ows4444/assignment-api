@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const request = require("supertest");
 const app = require("../../app");
 describe("Get Endpoints", () => {
@@ -59,6 +61,20 @@ describe("Post Endpoints", (done) => {
     const res = await request(app).post("/api/film").send(film);
     expect(res.statusCode).toEqual(400);
     expect(res.body.title).toBe("Film Creating Failed!");
-    expect(res.body.errors).toBe("Film Creating Failed!");
+  });
+
+  it("should success film create", async () => {
+    const res = await request(app)
+      .post("/api/film")
+      .attach("photo", path.resolve("uploads\\film.png"))
+      .field("name", "Film Name")
+      .field("description", "Film description")
+      .field("releaseDate", "2020-12-11")
+      .field("rating", 3)
+      .field("ticketPrice", 900)
+      .field("country", "Pakistan")
+      .field("genre", ["funny", "action"]);
+    expect(res.statusCode).toEqual(201);
+    expect(res.body.name).toBe("Film Name");
   });
 });
