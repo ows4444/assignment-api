@@ -24,9 +24,8 @@ passport.use(
 );
 
 passport.use(
-  new BearerStrategy({ session: false }, (token, done) => {
+  new BearerStrategy((token, done) => {
     const decodedToken = jwt.decode(token, JWT_TOKEN);
-
     const id = decodedToken && decodedToken.id;
     const expires = decodedToken && new Date(decodedToken.exp * 1000);
     if (expires > Date.now()) {

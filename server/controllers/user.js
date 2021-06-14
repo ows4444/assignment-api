@@ -7,27 +7,13 @@ const { validateReq } = require("../common");
 const { JWT_TOKEN, TOKEN_EXPIRATION_TIME } = require("../../config");
 
 const SignInValidation = [
-  check("username")
-    .not()
-    .isEmpty()
-    .withMessage("must be required")
-    .isEmail()
-    .withMessage("must be a email")
-    .normalizeEmail(),
+  check("username").not().isEmpty().withMessage("must be required").isEmail().withMessage("must be a email").normalizeEmail(),
   check("password").not().isEmpty().withMessage("must be required"),
 ];
 const SignUpValidation = [
-  body("password")
-    .isLength({ min: 5 })
-    .withMessage("must be at least 5 chars long"),
+  body("password").isLength({ min: 5 }).withMessage("must be at least 5 chars long"),
   body("name").not().isEmpty().withMessage("must be required"),
-  body("email")
-    .not()
-    .isEmpty()
-    .withMessage("must be required")
-    .isEmail()
-    .withMessage("must be a email")
-    .normalizeEmail(),
+  body("email").not().isEmpty().withMessage("must be required").isEmail().withMessage("must be a email").normalizeEmail(),
   body("email").custom((email) => {
     return User.findOne({ where: { email } }).then((user) => {
       if (user) {
@@ -39,6 +25,10 @@ const SignUpValidation = [
 
 module.exports = {
   profile: compose([
+    (req, res, next) => {
+      console.log(req.headers);
+      next();
+    },
     passport.authenticate("bearer"),
     (req, res) => res.json(req.user),
   ]),
