@@ -5,10 +5,13 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon bin/www",
+    "test": "jest",
+    "remise": "yarn migrate:undo:all && yarn migrate && yarn seed",
     "migrate": "sequelize-cli db:migrate",
     "migrate:undo": "sequelize-cli db:migrate:undo",
     "migrate:undo:all": "sequelize-cli db:migrate:undo:all",
-    "seed": "sequelize-cli db:seed:all"
+    "seed": "sequelize-cli db:seed:all",
+    "seed:undo": "sequelize-cli db:seed:undo"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -32,6 +35,14 @@
     "validator": "^13.6.0"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.2.0"
+    "jest": "^27.0.4",
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.1.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
